@@ -1,0 +1,19 @@
+tbody>tr>td{
+  padding-top: 37px;
+font-size: large;
+
+}
+tbody>tr>td.img {
+  padding: 10px;
+}
+
+@media screen and (max-width: 600px) {
+  .nd,
+  .td {
+    display: none;
+  }
+
+  img {
+    width: 50px;
+  }
+}

@@ -1,0 +1,99 @@
+
+<div class="row" >
+  <div class="col-sm-12">
+    <button type="button" class="btn btn-success mb-2"
+    (click)="adjust='Add'"
+    data-toggle="modal" data-target="#staticBackdrop">
+      add product
+    </button>
+  </div>
+</div>
+
+<div class="text-center my-2" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>
+
+<table *ngIf="!loading" class="table table-striped">
+  <thead>
+    <tr>
+      <th  style="max-width: 100px;">Model</th>
+      <th >Name</th>
+      <th class="nd">Category</th>
+      <th class="nd">Price</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="d-felx justify-content-center align-items-center" *ngFor="let item of products, let i = index">
+      <td  style="max-width: 100px;"><img class="im" src="{{item.image}}" style="max-width: 100px;max-height: 70px;"></td>
+      <td  style="max-width: 200px;">{{item.title}}</td>
+      <td class="nd" id="catid">{{item.category}}</td>
+      <td class="nd"><strong>{{item.price}}</strong></td>
+      <td  style="padding-top: 15px;" >
+        <button type="button"
+         class="btn btn-primary"
+         data-toggle="modal"
+         data-target="#staticBackdrop"
+         (click)="updateItems(item); adjust='Update'">Update</button></td>
+      </tr>
+  </tbody>
+</table>
+
+<div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel" (click)="adjust='Add'">Add product</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="Form.reset();this.base64=''">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="Form" (ngSubmit)="onSubmit(Form)">
+          <div class="row">
+            <div class="col-md-4 mb-3">
+              <label for="1">Tilte</label>
+              <input type="text" class="form-control" formControlName="title" id="1">
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="2">Price</label>
+              <div class="input-group">
+                <input type="number" formControlName="price" class="form-control" id="2">
+                <div class="input-group-append">
+                  <span class="input-group-text">L.E</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="3">Categoreis :</label>
+              <select class="custom-select" id="3" formControlName="category" >
+                <option *ngFor="let catg of categories,let i = index" [selected]="catg === productCategory" >{{catg}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-5 mb-3">
+              <label for="4" style="display: block;">Image</label>
+              <img src="{{base64}}" class="my-3" style="width: 300px;max-height: 250px;">
+              <input type="file" formControlName="image" (change)="getimage($event)" class="form-control" id="4">
+            </div>
+            <div class="col-md-7 mb-3" >
+              <label >Description</label>
+              <textarea class="form-control" style="height: 150px;"
+              placeholder="text here..." formControlName="description"></textarea>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-12 me-5" style="text-align:right;">
+              <button type="button" class="btn btn-danger m-2"
+                data-dismiss="modal" (click)="Form.reset();this.base64=''">Cancel</button>
+              <button type="submit" class="btn btn-success"  [disabled]="Form.invalid">{{adjust}} Product</button>
+            </div>
+          </div>
+          <div class="alert alert-success" *ngIf="alert">your Product has been added successfully</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

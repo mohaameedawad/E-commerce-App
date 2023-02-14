@@ -1,0 +1,18 @@
+<div class="row my-2">
+  <div class="col-md-3 mb-3">
+    <label for="validationDefault04">Categoreis :</label>
+    <select class="custom-select" (change)="filterCategories($event)" id="validationDefault04" >
+      <option selected >All categories</option>
+      <option *ngFor="let catg of categories">{{catg}}</option>
+    </select>
+  </div>
+</div>
+
+  <div class="row row-cols-1 row-cols-md-3 row-cols-lg-4" *ngIf="!loading">
+    <div class="col mb-4" *ngFor="let item of products, index as i" >
+      <app-one-product  [data]="item" (item)="addtocart($event)"></app-one-product>
+    </div>
+  </div>
+  <div class="text-center my-2" *ngIf="loading">
+    <app-spinner></app-spinner>
+  </div>

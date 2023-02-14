@@ -1,0 +1,51 @@
+
+<div class="row mb-2">
+  <div class="col-sm-12 col-md-9 my-3 text-danger">
+    <h1 >Shopping Cart</h1>
+    <h5>you have {{cartProducts.length}} items in your cart</h5>
+  </div>
+  <div class="col-sm-3">
+    <br><br>
+    <button class="btn btn-danger" style="font-size:1em;" (click)="clearAllCart()">Clear Shopping Cart</button>
+  </div>
+</div>
+<div class="">
+  <table class="table table-borderless " style="text-align:center;">
+    <thead class="thead-light">
+      <tr style="text-align:center;">
+        <th >Model </th>
+        <th class="w-25 nd">Name</th>
+        <th >Price</th>
+        <th  >Quantity</th>
+        <th >Total</th>
+        <th ></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="border" *ngFor="let item of cartProducts, let i = index" #tt>
+        <td class="img"><img src="{{item.item.image}}" style="max-width:100px;max-height:100px;"></td>
+        <td class="nd">{{item.item.title}}</td>
+        <td>{{item.item.price}} L.E</td>
+        <td class="d-flex justify-content-center align-items-center">
+          <button class="btn btn-dark nd" (click)="addamount(i)">+</button>
+          <input type="number" class="form-control mx-2 p-2 w-50 text-center" (change)="totalamout()" [(ngModel)]="item.quantity">
+          <button class="btn btn-dark nd" (click)="minsamount(i)">-</button>
+        </td>
+        <td>{{(item.item.price * item.quantity).toFixed(2)}}</td>
+        <td><button class="btn btn-danger" (click)="deleteItem(i)">Delete</button></td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr class="border">
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th class="nd"scope="col"></th>
+        <th  scope="col" >Total:</th>
+        <th scope="col" >{{total.toFixed(2)}} L.E</th>
+        <th scope="col" class="btn"><button class="btn btn-success" (click)="addToCart()">Order Now</button></th>
+      </tr>
+    </tfoot>
+  </table>
+  <div class="alert alert-success" *ngIf="success"> Well done, your Order has been sent successfully</div>
+</div>
+

@@ -1,0 +1,16 @@
+<div class="row m-5" *ngIf="!loading">
+  <div class="col-md-5 col-xs-12">
+    <img src="{{item.image}}" style="max-height:500px; max-width:300px ;">
+  </div>
+  <div class="col-md-7 col-xs-12">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"> <strong style="font-size: 20px;">title:</strong>  {{item.title}}</li>
+      <li class="list-group-item"><strong style="font-size: 20px;">category:</strong> {{item.category}}</li>
+      <li class="list-group-item"><strong style="font-size: 20px;">description:</strong> {{item.description}}</li>
+      <li class="list-group-item"><strong style="font-size: 20px;">price:</strong> {{item.price}} </li>
+    </ul>
+  </div>
+</div>
+<div class="text-center my-2" *ngIf="loading">
+  <app-spinner></app-spinner>
+</div>

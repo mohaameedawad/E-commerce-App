@@ -1,0 +1,22 @@
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
+  <div class="mt-5 p-3 col-sm-12 col-md-8 border" style="margin: auto;">
+
+    <div class="col-md-12 mb-3">
+      <label for="1">Email</label>
+      <input type="email" class="form-control" id="1" ngModel email="" name="email" required>
+    </div>
+    <div class="col-md-12 mb-4">
+      <label for="2">Password</label>
+      <input type="password" class="form-control" id="2" ngModel  name="password" required>
+    </div>
+    <div class="row" >
+      <div class="col-sm-3"></div>
+      <div class=" col-sm-12 col-md-2 ">
+          <button class="btn btn-primary mb-3" type="submit" [disabled]="f.invalid">Login</button>
+      </div>
+      <div class=" col-sm-12 col-md-4">
+        <a routerLink="/register" class="btn btn-success ">Creat New Account</a>
+      </div>
+    </div>
+  </div>
+</form>
